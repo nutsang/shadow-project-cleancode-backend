@@ -16,6 +16,7 @@ const bannerRoute = require('./routes/banner-route')
 const generalProductRoute = require('./routes/general-product-route')
 const auctionProductRoute = require('./routes/auction-product-route')
 const gachaProductRoute = require('./routes/gacha-product-route')
+const paymentMethod = require('./routes/payment-method-route')
 
 app.use(cookieParser())
 app.use(express.json())
@@ -34,6 +35,7 @@ app.use('/api', bannerRoute)
 app.use('/api', generalProductRoute)
 app.use('/api', auctionProductRoute)
 app.use('/api', gachaProductRoute)
+app.use('/api', paymentMethod)
 
 const port = process.env.PORT || 8000
 const server = app.listen(port, () => {

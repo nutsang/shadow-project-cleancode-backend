@@ -80,7 +80,6 @@ module.exports.signInAccount = (request, response) => {
     }else{
         connection.query('SELECT email, suspended_status, role FROM account WHERE email = ?', [requestEmail], (error, result) => {
             if(error || result.length !== 1){
-                console.log(error)
                 response.status(200).json({status: false, payload: 'ชื่อผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง'})
             }else if(result[0].suspended_status !== 0){
                 response.status(200).json({status: false, payload: 'บัญชีนี้ถูกระงับ'})
@@ -135,4 +134,18 @@ module.exports.signOutAccount = (request, response) => {
         sameSite: 'none',
     })
     response.status(200).json({status: false, payload: {}})
+}
+
+module.exports.selectAccount = (request, response) => {
+    if(!isConnected){
+        response.status(200).json({status: false, payload: 'การแสดงข้อมูลล้มเหลว'})
+    }else{
+        connection.query('SELECT email, username, suspended_status, role FROM account', [], (error, result) => {
+            if(error){
+                response.status(200).json({status: false, payload: 'การแสดงข้อมูลล้มเหลว'})
+            }else{ 
+                response.status(200).json({status: true, payload: result})
+            }
+        })
+    }
 }

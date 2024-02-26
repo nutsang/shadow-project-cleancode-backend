@@ -19,3 +19,7 @@ exports.signOutAccount = (request, response) => {
 exports.authenticationAccount = (request, response) => {
     accountModel.authenticationAccount(request, response)
 }
+
+exports.selectAccount = (request, response) => {
+    accountModel.selectAccount(request, response)
+}

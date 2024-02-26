@@ -5,7 +5,7 @@ const multer = require('multer')
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const storageBanner = multer.diskStorage({
+const storageGeneralProduct = multer.diskStorage({
     destination: (request, file, callback) => {
         callback(null, './public/images/general-product')
     },
@@ -21,7 +21,7 @@ const storageBanner = multer.diskStorage({
 })
 
 const upload = multer({
-    storage: storageBanner,
+    storage: storageGeneralProduct,
     fileFilter: (request, file, callback) => {
         if(file.mimetype === 'image/png'){
             callback(null, true)
@@ -73,7 +73,7 @@ module.exports.createGeneralProduct = (request, response) => {
 }
 
 module.exports.readGeneralProduct = (request, response) => {
-    connection.query('SELECT name , game_name , normal_price , special_price , special_price_status , information , description FROM general_product', [], (error, result) => {
+    connection.query('SELECT uuid, name , game_name , normal_price , special_price , special_price_status , information , description FROM general_product', [], (error, result) => {
         if (error) {
             response.status(200).json({ status: false, payload: [] })
         } else {

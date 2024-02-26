@@ -5,7 +5,7 @@ const multer = require('multer')
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const storageBanner = multer.diskStorage({
+const storageGachaProduct = multer.diskStorage({
     destination: (request, file, callback) => {
         callback(null, './public/images/gacha-product')
     },
@@ -21,7 +21,7 @@ const storageBanner = multer.diskStorage({
 })
 
 const upload = multer({
-    storage: storageBanner,
+    storage: storageGachaProduct,
     fileFilter: (request, file, callback) => {
         if(file.mimetype === 'image/png'){
             callback(null, true)
@@ -73,7 +73,7 @@ module.exports.createGachaProduct = (request, response) => {
 }
 
 module.exports.readGachaProduct = (request, response) => {
-    connection.query('SELECT game_name , name , chance , information , description FROM gacha_product', [], (error, result) => {
+    connection.query('SELECT uuid, game_name , name , chance, guarantee_status, information , description FROM gacha_product', [], (error, result) => {
         if (error) {
             response.status(200).json({ status: false, payload: [] })
         } else {
