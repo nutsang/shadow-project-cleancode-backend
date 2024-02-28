@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortune-inc/tw-voucher": "^1.0.10",
+    "@opecgame/twapi": "^1.2.1",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
